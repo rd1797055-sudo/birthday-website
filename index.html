@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Manami 🌸</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #ffffff;
+        text-align: center;
+    }
+
+    .card {
+        background: rgba(255,255,255,0.2);
+        padding: 32px;
+        border-radius: 28px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+        max-width: 360px;
+        backdrop-filter: blur(6px);
+        z-index: 2;
+        animation: fadeIn 2s ease;
+    }
+
+    h1 {
+        font-size: 2.2em;
+        margin-bottom: 6px;
+    }
+
+    h2 {
+        font-weight: normal;
+        margin-bottom: 18px;
+    }
+
+    .heart {
+        font-size: 2.6em;
+        animation: beat 1.2s infinite;
+        margin-bottom: 12px;
+    }
+
+    #typing {
+        font-size: 1.05em;
+        line-height: 1.65;
+        min-height: 110px;
+    }
+
+    #countdown {
+        margin-top: 16px;
+        font-size: 0.95em;
+        font-weight: 500;
+    }
+
+    button {
+        margin-top: 18px;
+        padding: 10px 22px;
+        border: none;
+        border-radius: 22px;
+        background: rgba(255,255,255,0.85);
+        color: #d6336c;
+        font-size: 0.95em;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        transform: scale(1.05);
+        background: white;
+    }
+
+    footer {
+        margin-top: 18px;
+        font-size: 0.85em;
+        opacity: 0.9;
+    }
+
+    @keyframes beat {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.18); }
+        100% { transform: scale(1); }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(25px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .floating-heart {
+        position: absolute;
+        bottom: -20px;
+        font-size: 18px;
+        animation: floatUp 7s linear infinite;
+        opacity: 0.6;
+    }
+
+    @keyframes floatUp {
+        from { transform: translateY(0); opacity: 0.6; }
+        to { transform: translateY(-110vh); opacity: 0; }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Happy Birthday 🎂</h1>
+    <h2>Manami 🌸</h2>
+
+    <div class="heart">❤️</div>
+
+    <div id="typing"></div>
+
+    <div id="countdown"></div>
+
+    <button onclick="playMusic()">Play a soft song 🎶</button>
+
+    <footer>
+        Made with sincerity 🌷<br>
+        9th January
+    </footer>
+</div>
+
+<audio id="music" loop>
+    <source src="https://cdn.pixabay.com/audio/2022/10/03/audio_4b7c9c40a1.mp3">
+</audio>
+
+<script>
+const message =
+"Some people quietly make the world feel warmer just by being in it. You are one of them. On your birthday, I just wish you peace, happiness, and moments that make you smile without even trying. May this year be gentle and kind to you ✨";
+
+let i = 0;
+function typeText() {
+    if (i < message.length) {
+        document.getElementById("typing").innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeText, 45);
+    }
+}
+typeText();
+
+const target = new Date("January 9, 2026 00:00:00").getTime();
+setInterval(() => {
+    const now = new Date().getTime();
+    const diff = target - now;
+
+    if (diff > 0) {
+        const d = Math.floor(diff / (1000*60*60*24));
+        const h = Math.floor((diff / (1000*60*60)) % 24);
+        const m = Math.floor((diff / (1000*60)) % 60);
+        document.getElementById("countdown").innerHTML =
+        ⏳ ${d} days • ${h} hrs • ${m} mins to your day;
+    } else {
+        document.getElementById("countdown").innerHTML =
+        "🎉 Today is your special day!";
+    }
+}, 1000);
+
+function playMusic() {
+    document.getElementById("music").play();
+}
+
+setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "floating-heart";
+    h.innerHTML = "🤍";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.animationDuration = (Math.random() * 3 + 5) + "s";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 7000);
+}, 600);
+</script>
+
+</body>
+</html>
